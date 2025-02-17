@@ -1,8 +1,20 @@
-const API_KEY = `TR2FDSJYXDW8L6KKDBV9AZAJR`;
-const weatherInfo = document.querySelector(".weather-info");
+import "./style.css";
 
-document.querySelector(".submit").addEventListener("click", async (e) => {
+let isCelsius = true;
+
+document.querySelector(".submit").addEventListener("click", (e) => {
   e.preventDefault();
+  callWeatherApi();
+});
+
+document.getElementById("toggle-unit").addEventListener("click", () => {
+  isCelsius = !isCelsius;
+  updateWeatherDisplay();
+});
+
+async function callWeatherApi(){
+  const weatherInfo = document.querySelector(".weather-info");
+  const API_KEY = `TR2FDSJYXDW8L6KKDBV9AZAJR`;
   let location = document.querySelector("#city").value;
   const response = await fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}`,
@@ -22,13 +34,12 @@ document.querySelector(".submit").addEventListener("click", async (e) => {
     let infoField = document.createElement('div');
     infoField.classList.add('weather-card');
     infoField.innerHTML = `
-      <h2>Weather in ${location}</h2>
-      <p>Date: ${day.datetime}</p>
-      <p>Temperature: ${day.temp}°C</p>
-      <p>Max Temp: ${day.tempmax}°C</p>
-      <p>Min Temp: ${day.tempmin}°C</p>
+      <h2>Weather in ${location} on ${day.datetime}</h2>
+      <p>Temperature: ${day.temp}°F</p>
+      <p>Max Temp: ${day.tempmax}°F</p>
+      <p>Min Temp: ${day.tempmin}°F</p>
       <p>Conditions: ${day.conditions}</p>
     `;
     weatherInfo.appendChild(infoField);
   });
-});
+}
