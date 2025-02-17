@@ -85,3 +85,16 @@ button:hover {
 .weather-info {
   margin-top: 20px;
 }
+.weather-card {
+  background: #e0e0e0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+.weather-card h2 {
+  margin: 0 0 10px;
+}
+.weather-card p {
+  margin: 5px 0;
+}
